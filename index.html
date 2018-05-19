@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Psychic Game</title>
+    <script src="https://code.jquery.com/jquery.js"></script>
+</head>
+
+<body>
+
+
+
+    <div id="game">
+        <h1>Guess what letter I'm thinking of</h1>
+        <div>
+
+            <h3>Wins:</h3>
+            <div id="yourwins">
+
+            </div>
+
+            <h3>Losses:</h3>
+            <div id="yourlosses">
+
+            </div>
+
+            <h3>Guesses Left:</h3>
+            <div id="leftguesses">
+
+            </div>
+
+            <h3>Your guesses so far:</h3>
+            <div id="currentguesses">
+
+            </div>
+
+            <script type="text/javascript">
+
+
+                //All of the options that the computer can choose from in an array.
+                let computerChoices = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+
+
+                // Creating variables to hold the number of wins, losses, and ties. They start at 0.
+                let wins = 0;
+                let losses = 0;
+
+
+
+                //variable that shows the amount of guesses user has left, from 9.
+                let guessesLeft = 9;
+
+
+                //variable that keeps track of users guesses already chosen.
+                let guesses = [];
+
+
+
+
+                // This function is run whenever the user presses a key.
+                document.onkeyup = function (event) {
+
+                    // Determines which key was pressed.
+                    let userGuess = event.key;
+                    console.log(userGuess);
+
+                    $("#leftguesses").text(guessesLeft);
+
+                    // grab computers guess
+                    let computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+
+                    // record and keep track of user guesses
+                    guesses.push(userGuess);
+                    console.log(guesses);
+
+                    $("#currentguesses").text(guesses);
+
+
+
+                    //  if user guess is different than computer guess, losses goes up by one
+                    if (userGuess != computerGuess) {
+                        guessesLeft--;
+
+                        if (guessesLeft === 0) {
+                            //guessesleft goes back to 9
+                            guessesLeft = 9;
+
+                            //losses goes up by 1
+                            losses++;
+
+                            //guesses so far needs to be emptied
+                            guesses = [];
+
+
+                            $("#yourlosses").text(losses);
+
+
+
+                        }
+
+
+
+
+                    }
+
+
+                    //  if user guess is same as computer guess, wins goes up by one
+                    if (userGuess === computerGuess) {
+                        wins++;
+
+                        //guessesleft goes back to 9
+                        guessesLeft = 9;
+
+                        //guesses so far needs to be emptied
+                        guesses = [];
+
+                        $("#yourwins").text(wins);
+
+
+
+                    }
+
+
+
+
+                    console.log(guesses + " vs " + computerGuess);
+                    console.log("you won" + wins);
+                    console.log("you lost" + losses);
+
+                }
+
+
+            </script>
+
+</body>
+
+</html>
