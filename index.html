@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Psychic Game</title>
-    <script src="https://code.jquery.com/jquery.js"></script>
 </head>
 
 <body>
@@ -56,8 +55,10 @@
                 let guesses = [];
 
 
-
-
+              // grab computers guess
+               let computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+                
+                
                 // This function is run whenever the user presses a key.
                 document.onkeyup = function (event) {
 
@@ -65,17 +66,18 @@
                     let userGuess = event.key;
                     console.log(userGuess);
 
-                    $("#leftguesses").text(guessesLeft);
-
-                    // grab computers guess
-                    let computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+                    let leftGuesses = document.getElementById("leftguesses");
+                    leftGuesses.textContent = guessesLeft;
 
 
                     // record and keep track of user guesses
                     guesses.push(userGuess);
                     console.log(guesses);
 
-                    $("#currentguesses").text(guesses);
+                    let currentGuesses = document.getElementById("currentguesses");
+                    currentGuesses.textContent = guesses;
+
+
 
 
 
@@ -84,7 +86,7 @@
                         guessesLeft--;
 
                         if (guessesLeft === 0) {
-                            //guessesleft goes back to 9
+                            //guessesleft goes back to 932
                             guessesLeft = 9;
 
                             //losses goes up by 1
@@ -93,8 +95,11 @@
                             //guesses so far needs to be emptied
                             guesses = [];
 
+                            computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
 
-                            $("#yourlosses").text(losses);
+                            // $("#yourlosses").text(losses);
+                            var yourLosses = document.getElementById("yourlosses");
+                            yourLosses.textContent = losses;
 
 
 
@@ -116,7 +121,10 @@
                         //guesses so far needs to be emptied
                         guesses = [];
 
-                        $("#yourwins").text(wins);
+                        computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+                        var yourWins = document.getElementById("yourwins");
+                        yourWins.textContent = wins;
 
 
 
@@ -126,8 +134,6 @@
 
 
                     console.log(guesses + " vs " + computerGuess);
-                    console.log("you won" + wins);
-                    console.log("you lost" + losses);
 
                 }
 
